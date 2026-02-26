@@ -1,18 +1,29 @@
--- Sentrix (Cracked Version)
--- Protection Removed by E
+-- ==================== STRONG BAC BYPASS ====================
+print("🔒 Sentrix BAC Bypass Activated")
 
--- Anti-Kick Bypass (blocks BAC-style kicks)
 local mt = getrawmetatable(game)
 local oldNamecall = mt.__namecall
 setreadonly(mt, false)
+
 mt.__namecall = newcclosure(function(self, ...)
-local method = getnamecallmethod()
-if method == "Kick" or method == "kick" then
-return task.wait(9e9) -- block kick
-end
-return oldNamecall(self, ...)
+    local method = getnamecallmethod()
+    if method == "Kick" or method == "kick" then
+        warn("[Sentrix] Blocked BAC Kick")
+        return task.wait(9e9)
+    end
+    if (method == "FireServer" or method == "InvokeServer") then
+        local name = tostring(self.Name):lower()
+        if name:find("bac") or name:find("kick") or name:find("anticheat") or name:find("jjffx") then
+            warn("[Sentrix] Blocked BAC remote: " .. self.Name)
+            return
+        end
+    end
+    return oldNamecall(self, ...)
 end)
 setreadonly(mt, true)
+
+print("✅ BAC Bypass Loaded - You should not get kicked anymore")
+-- ==================== END BYPASS ====================
 
 local Players = game:GetService('Players')
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
@@ -5129,4 +5140,5 @@ task.wait(1)
 if DualBypassSystem and DualBypassSystem.__properties and DualBypassSystem.__properties.__test_bypass_enabled then
 print("✅ Dual Bypass System initialized automatically")
 end
+
 end)
