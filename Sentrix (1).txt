@@ -1,29 +1,9 @@
--- ==================== STRONG BAC BYPASS ====================
-print("🔒 Sentrix BAC Bypass Activated")
+print("Bypassing Security Checks..")
 
-local mt = getrawmetatable(game)
-local oldNamecall = mt.__namecall
-setreadonly(mt, false)
-
-mt.__namecall = newcclosure(function(self, ...)
-    local method = getnamecallmethod()
-    if method == "Kick" or method == "kick" then
-        warn("[Sentrix] Blocked BAC Kick")
-        return task.wait(9e9)
-    end
-    if (method == "FireServer" or method == "InvokeServer") then
-        local name = tostring(self.Name):lower()
-        if name:find("bac") or name:find("kick") or name:find("anticheat") or name:find("jjffx") then
-            warn("[Sentrix] Blocked BAC remote: " .. self.Name)
-            return
-        end
-    end
-    return oldNamecall(self, ...)
-end)
-setreadonly(mt, true)
-
-print("✅ BAC Bypass Loaded - You should not get kicked anymore")
--- ==================== END BYPASS ====================
+game:GetService("ReplicatedStorage").Security.RemoteEvent:Destroy()
+game:GetService("ReplicatedStorage").Security[""]:Destroy()
+game:GetService("ReplicatedStorage").Security:Destroy()
+game:GetService("Players").LocalPlayer.PlayerScripts.Client.DeviceChecker:Destroy()
 
 local Players = game:GetService('Players')
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
@@ -5142,3 +5122,4 @@ print("✅ Dual Bypass System initialized automatically")
 end
 
 end)
+
